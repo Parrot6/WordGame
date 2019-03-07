@@ -5,8 +5,8 @@
             @mouseup="clickUp" 
             @mousedown="clickDown" 
             class="hoverBox" 
-            v-bind:class="[{ selected : letter.selected},{hover : hovered},{hoverAndSelected : (letter.selected && hovered)}]">
-            {{letter.letter}}
+            v-bind:class="[{standard: true}, { selected : letter.selected},{hover : hovered},{hoverAndSelected : (letter.selected && hovered)}]">
+                 <div class="letter">{{letter.letter}}</div>
         </v-card>
       </v-card>
 </template>
@@ -26,7 +26,6 @@ export default class GamePiece extends Vue {
         
     clickDown () {
         this.isClickedDown = true
-        /* if(this.isSelected) CurrentWord.removeLetter() */
         this.deHover()
         this.$emit('picked', this.letter);
     }
@@ -44,42 +43,50 @@ export default class GamePiece extends Vue {
 }
 </script>
 <style scoped>
+
 .piece {
-    display: flex;
-    width: 75px;
-    height: 75px;
+    width: 100%;
+    height: 10vh;
     background-color: coral;
     border: 1px solid black;
-    margin: 1px;
-    justify-content: center;
-    align-items: center; 
 }
 .hoverBox {
-    display: flex;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     background-color:firebrick;
     width: 50%;
     height: 50%;
-    justify-content: center;
-    align-items: center; 
+}
+.letter {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.standard {
+    font-size: 35px;
+    font-weight: bold;
 }
 .selected {
     background-color: green;
     width: 60%;
     height: 60%;
-    font-size: 20px;
+    font-size: 50px;
     font-weight: bolder;
 }
 .hover {
     width: 80%;
     height: 80%;
     background-color:olivedrab;
-    font-size: 17px;
+    font-size: 50px;
 }
 .hoverAndSelected {
     width: 80%;
     height: 80%;
     background-color:darkred;
-    font-size: 17px;
+    font-size: 35px;
 }
 
 </style>
